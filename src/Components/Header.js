@@ -8,7 +8,7 @@ import {
   Pressable,
 } from 'react-native';
 import {ApiCall} from '../redux/reducers/ApiReducer';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Header = () => {
