@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,47 +9,21 @@ import {
   Pressable,
   FlatList,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {ApiCall} from '../redux/reducers/ApiReducer';
+import {useSelector} from 'react-redux';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 
-const HomeScreen = () => {
-  const [key, setKey] = useState('');
+import Header from '../Components/Header';
 
-  const dispatch = useDispatch();
+const HomeScreen = () => {
   const data = useSelector(state => state.apireducer.data.items);
-  // console.log('DADADA', data);
+
   const navigation = useNavigation();
-  const windowHeight = Dimensions.get('window').height;
-  const headerHeight = windowHeight * 0.3;
 
   return (
     <View style={styles.main}>
-      <View style={[styles.header, {height: headerHeight}]}>
-        <View>
-          <View style={styles.headerTextContainer}>
-            <Text style={styles.headerText}>GITHUB FINDER</Text>
-          </View>
-          <View style={styles.line}></View>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholderTextColor="#ffffff"
-            style={styles.input}
-            placeholder="Username"
-            onChangeText={text => setKey(text)}
-            value={key}
-          />
-          <Pressable
-            onPress={() => dispatch(ApiCall(key))}
-            style={({pressed}) => [pressed ? styles.pressed : null]}>
-            <AntDesign name="search1" size={26} color="#fff" />
-          </Pressable>
-        </View>
-      </View>
+      <Header />
       <View style={styles.container}>
         <FlatList
           initialNumToRender={15}
@@ -93,47 +68,6 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   main: {flex: 1},
-  header: {
-    backgroundColor: '#191a4a',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomStartRadius: 30,
-    borderBottomEndRadius: 30,
-  },
-
-  headerTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerText: {
-    color: '#ffffff',
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-
-  line: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#e8e8e8',
-    marginTop: 5,
-  },
-  inputContainer: {
-    marginTop: 10,
-    width: '85%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    backgroundColor: '#474b8a',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderRadius: 10,
-    fontSize: 16,
-    color: '#ffffff',
-    width: '85%',
-  },
   container: {
     flex: 1,
     marginHorizontal: 25,
