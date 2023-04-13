@@ -13,7 +13,6 @@ export const ApiCall = key => {
     fetch('https://api.github.com/search/users?q=' + key)
       .then(res => res.json())
       .then(response => {
-        // console.log('AAA', response);
         dispatch(ApiSuccess(response));
       })
       .catch(err => {
